@@ -2,7 +2,14 @@ from pydantic import BaseModel
 
 
 class Student(BaseModel):
-    first_name: str
-    last_name: str
-    age: int
+    name: str
     email: str
+    job: str
+    company: str
+
+class UpdateStudent(BaseModel):
+    student_id: str
+    name: str
+    email: str
+    job: str
+    company: str

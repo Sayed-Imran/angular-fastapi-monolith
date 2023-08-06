@@ -28,7 +28,7 @@ class StudentDetails(MongoCollectionBaseClass):
         :return: The object of the class
         :doc-author: Sayed Imran
         """
-        return self.find()
+        return list(self.find(query={}))
     
     def get_student_by_id(self, student_id):
         """
@@ -50,7 +50,8 @@ class StudentDetails(MongoCollectionBaseClass):
         :return: The object of the class
         :doc-author: Sayed Imran
         """
-        return self.insert_one(student)
+        if self.insert_one(student):
+            return {"message": "Student added successfully"}
     
     def update_student(self, student):
         """

@@ -1,10 +1,10 @@
 from fastapi import APIRouter
 from scripts.core.handlers.student_handler import StudentHandler
-from scripts.schemas import Student
+from scripts.schemas import Student, UpdateStudent
 from fastapi import HTTPException, status
 
 
-router = APIRouter()
+router = APIRouter(prefix="/api")
 
 @router.get("/students")
 def get_students():
@@ -40,7 +40,7 @@ def add_student(student: Student):
 
 
 @router.put("/students")
-def update_student(student: Student):
+def update_student(student: UpdateStudent):
     try:
         student_handler = StudentHandler()
         return student_handler.update_student(student=student.dict())

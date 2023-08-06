@@ -3,7 +3,9 @@ from typing import Dict, List, Optional
 from pymongo import MongoClient
 from pymongo.cursor import Cursor
 
-from scripts.logging import logger
+from scripts.logging import getLogger
+
+logger = getLogger()
 
 
 class MongoConnect:
@@ -42,7 +44,8 @@ class MongoCollectionBaseClass:
             db = self.client[database_name]
             collection = db[collection_name]
             response = collection.insert_one(data)
-            return response.inserted_id
+            logger.info(f"Inserted data with id {response.inserted_id}")
+            return True
         except Exception as e:
             logger.error(f"Error in inserting the data {str(e)}")
             raise e
